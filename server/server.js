@@ -21,6 +21,12 @@ mongoose.connect(process.env.MONGO_URI)
     process.exit(1); // Server band ho jayega agar MongoDB nahi chala
   });
 
+// YE 2 LINE YAHAN DAAL DE (sabse important)
+app.use(express.static(path.join(__dirname, '../public')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+});
+
 // Parcel Schema
 const parcelSchema = new mongoose.Schema({
   trackingId: String,
